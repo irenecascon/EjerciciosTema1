@@ -37,20 +37,19 @@ def empaque():
             estado = 1
             condition.notify_all()
 
-# Crear los hilos
+
 hilo_preparacion = threading.Thread(target=preparacion)
 hilo_procesamiento = threading.Thread(target=procesamiento)
 hilo_empaque = threading.Thread(target=empaque)
 
-# Iniciar los hilos
 hilo_preparacion.start()
 hilo_procesamiento.start()
 hilo_empaque.start()
 
-# Esperar a que todos los hilos terminen
+
 hilo_preparacion.join()
 hilo_procesamiento.join()
 hilo_empaque.join()
 
-# Mensaje final
+
 print("Producción completada.")
