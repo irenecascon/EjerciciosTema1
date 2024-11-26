@@ -1,13 +1,10 @@
 import threading
 
-# Contador para el estado del sistema
 estado = 1  # 1: Preparación, 2: Procesamiento, 3: Empaque
 iteraciones_totales = 5  # Número total de ciclos de producción
 
-# Objeto Condition para sincronización
 condition = threading.Condition()
 
-# Función para la tarea de preparación
 def preparacion():
     global estado
     for i in range(1, iteraciones_totales + 1):
@@ -17,7 +14,6 @@ def preparacion():
             estado = 2
             condition.notify_all()
 
-# Función para la tarea de procesamiento
 def procesamiento():
     global estado
     for i in range(1, iteraciones_totales + 1):
@@ -27,7 +23,6 @@ def procesamiento():
             estado = 3
             condition.notify_all()
 
-# Función para la tarea de empaque
 def empaque():
     global estado
     for i in range(1, iteraciones_totales + 1):
@@ -46,10 +41,8 @@ hilo_preparacion.start()
 hilo_procesamiento.start()
 hilo_empaque.start()
 
-
 hilo_preparacion.join()
 hilo_procesamiento.join()
 hilo_empaque.join()
-
 
 print("Producción completada.")
